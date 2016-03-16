@@ -19,7 +19,7 @@
 	<!-- The initial example script to be disabled -->
 	<!-- <script type="text/babel" src="scripts/example.js"></script> -->
 
-	<!-- TODO: create the components
+	<!-- TODO: [x] create the components
 	* Component structure:
 	- CommentBox
 		- CommentList
@@ -32,12 +32,18 @@
 	
 	{/* NOTE: JSX comment syntax */}
 	
+	{/* NOTE: Example JSON data for testing */}
+	var data = [
+		{id: 1, author: "Netko Nesta", text: "Test komentar"},
+		{id: 2, author: "Booga Boo", text: "Test *komentar* za markdown"}
+	];
+
 	var CommentBox = React.createClass({
 		render: function() {
 			return (
 				<div className="commentBox">
 					<h1>Comments</h1>
-					<CommentList />
+					<CommentList data={this.props.data} />
 					<CommentForm />
 				</div>
 			);
@@ -46,10 +52,16 @@
 	
 	var CommentList = React.createClass({
 		render: function() {
+			var commentNodes = this.props.data.map(function(comment) {
+				return (
+				<Comment author={comment.author} key={comment.id}>
+					{comment.text}
+				</Comment>
+				);
+			});
 			return (
 				<div className="commentList">
-					<Comment author="N.N.">Test komentar</Comment>
-					<Comment author="Boogaboo">Test *komentar* za markdown</Comment>
+					{commentNodes}
 				</div>
 			);
 		}
@@ -84,7 +96,7 @@
 	});
 	
 	ReactDOM.render(
-		<CommentBox />,
+		<CommentBox data={data} />,
 		document.getElementById('content')
 	);
 	

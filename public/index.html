@@ -45,6 +45,7 @@
 					<h1>Comments</h1>
 					<CommentList data={this.props.data} />
 					<CommentForm />
+					<LikeButton />
 				</div>
 			);
 		}
@@ -95,11 +96,31 @@
 		}
 	});
 	
+	var LikeButton = React.createClass({
+		getInitialState: function() {
+			return {liked: false};
+		},
+		handleClick: function(event) {
+			this.setState({liked: !this.state.liked});
+		},
+		render: function() {
+			var text = this.state.liked ? 'like' : 'haven\'t liked';
+			var likedornot = this.state.liked ? "liked" : "notliked";
+			return (
+			<p className="clickable" onClick={this.handleClick}>
+				<div className={likedornot}>You {text} this comment. Click to toggle.</div>
+			</p>
+			);
+		}
+	});
+
 	ReactDOM.render(
 		<CommentBox data={data} />,
 		document.getElementById('content')
 	);
 	
+
+
 	</script>
 </body>
 

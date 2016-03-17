@@ -12,8 +12,24 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:hover, .clickable:hover {
   text-decoration: underline;
+}
+
+.liked {
+	color: #2fba2f;
+}
+
+.liked:hover {
+	background-color: #4b8451;
+}
+
+.notliked {
+	color: #2f39ba;
+}
+
+.notliked:hover {
+	background-color: #55898b;
 }
 
 code {
